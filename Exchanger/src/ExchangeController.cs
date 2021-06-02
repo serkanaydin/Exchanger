@@ -22,15 +22,18 @@ namespace Exchanger.src
         }
         private void userInterface()
         {
+            ConsoleKeyInfo cki;
+
             while (true)
             {
-                Console.WriteLine("Write quit to exit, press 0 to continue");
-                String input = Console.ReadLine();
-                    
-                if (input == USER_EXIT){
-                    Environment.Exit(Environment.ExitCode);
+                Console.WriteLine("Press esc to exit, enter to continue");
+                cki = Console.ReadKey(true);
+                switch (cki.Key)
+                {
+                    case ConsoleKey.Escape: Environment.Exit(Environment.ExitCode); continue;
+                    case ConsoleKey.Enter: exchange(); continue;
                 }
-                exchange();
+                
             }
            
 
@@ -39,6 +42,8 @@ namespace Exchanger.src
         {
             Currency from = getCurrency("Enter base currency code(Ex:USD) ");
             Currency to = getCurrency("Enter quote currency code(Ex:USD)");
+
+
 
             int size;
             Console.WriteLine("Enter size");
@@ -98,6 +103,6 @@ namespace Exchanger.src
             return getCurrency(message);
         }
 
-        
+
     }
 }
