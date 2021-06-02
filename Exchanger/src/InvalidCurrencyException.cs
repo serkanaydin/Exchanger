@@ -7,13 +7,13 @@ namespace Exchanger.src
     [Serializable]
     class InvalidCurrency : Exception
     {
-        public InvalidCurrency(int decision,Currency from,Currency to)
+        public InvalidCurrency(ExchangeType decision,Currency from,Currency to)
         {
             switch (decision)
             {
-                case 1: Console.WriteLine($"Exchange error for Forex Exchange: {from.ForexSelling} ForexBuying: {to.ForexBuying}");
+                case ExchangeType.ForexExchange: Console.WriteLine($"Exchange error for Forex Exchange: {from.ForexSelling} ForexBuying: {to.ForexBuying}");
                          break;
-                case 2:
+                case ExchangeType.BanknoteExchange:
                     Console.WriteLine($"Exchange error For Banknote Exchange: {from.BanknoteSelling} ForexBuying: {to.BanknoteBuying}");
                     break;
 

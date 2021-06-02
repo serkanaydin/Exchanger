@@ -7,6 +7,10 @@ using Exchanger.src;
 
 namespace Exchanger.src
 {
+    public enum ExchangeType{
+        ForexExchange=1,
+        BanknoteExchange =2
+        }
     class ExchangeController
     {
         private List<Currency> CurrencyList;
@@ -40,20 +44,20 @@ namespace Exchanger.src
             Console.WriteLine("Enter size");
             int.TryParse(Console.ReadLine(), out size);
 
-            int decision = 0;
+            ExchangeType decision;
             do
             {
                 Console.WriteLine("Forex(1) or banknote(2)");
-                int.TryParse(Console.ReadLine(), out decision);
-            } while (!(decision == 1 || decision == 2));
+                ExchangeType.TryParse(Console.ReadLine(), out decision);
+            } while (!(decision == ExchangeType.ForexExchange || decision == ExchangeType.ForexExchange));
 
             doCalculations(size, from, to, decision);
             
         }
-        private void doCalculations(int size,Currency from, Currency to,int decision)
+        private void doCalculations(int size,Currency from, Currency to,ExchangeType decision)
         {
             float rate;
-            if(decision == 1)
+            if(decision == ExchangeType.ForexExchange)
                 rate = (from.ForexSelling == 0 || from.ForexBuying == 0) ? -1 : from.ForexSelling / to.ForexBuying;
             else
                 rate = (from.BanknoteSelling == 0 || from.BanknoteBuying == 0) ? -1 : from.BanknoteSelling / to.BanknoteBuying;
@@ -62,7 +66,7 @@ namespace Exchanger.src
                 if (rate == -1)
                     throw new InvalidCurrency(decision, from, to);
                 float result = size * rate;
-                Console.WriteLine("Result:{result}");
+                Console.WriteLine($"Result:{result}");
             }
             catch(InvalidCurrency ex)
             {
