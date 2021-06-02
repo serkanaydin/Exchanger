@@ -50,7 +50,7 @@ namespace Exchanger.src
             
             try
             {
-                float rate = getExchangeRate(from, to, decision);
+                getExchangeRate(from, to, decision,out float rate);
                 if (rate == 0 || float.IsPositiveInfinity(rate))
                     throw new InvalidCurrency(decision, from, to);
                 Console.WriteLine("Enter size");
@@ -61,17 +61,11 @@ namespace Exchanger.src
             {
                 Console.WriteLine($"Please enter valid currencies for {decision}");
             }
-
-            
-
-
-
         }
 
-        private float getExchangeRate(Currency from, Currency to, ExchangeType decision)
+        private void getExchangeRate(Currency from, Currency to, ExchangeType decision,out float rate)
         {
-            float rate=0;
-
+            rate = 0;
             switch (decision)
             {
                 case ExchangeType.ForexExchange:
@@ -81,15 +75,9 @@ namespace Exchanger.src
                     rate = from.BanknoteSelling / to.BanknoteBuying;
                     break;
             }
-
-            
-            return rate;
         }
-            
-
         private Currency getCurrency(String message)
         {
-
             Console.WriteLine(message);
             var str = Console.ReadLine().ToUpper();
 
