@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Exchanger.src
 {
@@ -30,7 +31,7 @@ namespace Exchanger.src
                 {
                     case ConsoleKey.Escape: Environment.Exit(Environment.ExitCode); continue;
                     case ConsoleKey.Enter: exchange(); continue;
-                }          
+                }
             }
         }
         private void exchange()
@@ -50,11 +51,11 @@ namespace Exchanger.src
             } while (!(decision == ExchangeType.ForexExchange || decision == ExchangeType.BanknoteExchange));
 
             doCalculations(size, from, to, decision);
-            
+
         }
-        private void doCalculations(int size,Currency from, Currency to,ExchangeType decision)
+        private void doCalculations(int size, Currency from, Currency to, ExchangeType decision)
         {
-            float rate=0;
+            float rate = 0;
 
             switch (decision)
             {
@@ -63,19 +64,23 @@ namespace Exchanger.src
                     break;
                 case ExchangeType.BanknoteExchange:
                     rate = from.BanknoteSelling / to.BanknoteBuying;
+                    
                     break;
             }
-        
+
             try
             {
-                if (rate == 0)
+                if (rate == 0 || float.IsPositiveInfinity(rate))
                     throw new InvalidCurrency(decision, from, to);
                 float result = size * rate;
                 Console.WriteLine($"Result:{result}");
             }
-            catch(InvalidCurrency ex){
-                Console.WriteLine($"Please enter valid currencies for {decision}"); }         
+            catch (InvalidCurrency ex)
+            {
+                Console.WriteLine($"Please enter valid currencies for {decision}"); 
+            }
         }
+            
 
         private Currency getCurrency(String message)
         {
