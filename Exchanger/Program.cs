@@ -48,15 +48,9 @@ namespace Exchanger
                 en.NumberFormat, out temp) ? temp : 0;
 
                 CurrencyList.Add(new Currency(code, name, currencyName, ForexBuying, ForexSelling, BanknoteBuying, BanknoteSelling));
-
             }
             return CurrencyList;
         }
-
-
-
-
-
     }
 }
 

@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Exchanger.src;
 
 namespace Exchanger.src
 {
-    public enum ExchangeType{
+    public enum ExchangeType
+    {
         ForexExchange=1,
         BanknoteExchange =2
-        }
+    }
+
     class ExchangeController
     {
         private List<Currency> CurrencyList;
-        const String USER_EXIT = "quit";
+
         public ExchangeController(List<Currency> CurrencyList)
         {
             this.CurrencyList = CurrencyList;
@@ -32,18 +30,13 @@ namespace Exchanger.src
                 {
                     case ConsoleKey.Escape: Environment.Exit(Environment.ExitCode); continue;
                     case ConsoleKey.Enter: exchange(); continue;
-                }
-                
+                }          
             }
-           
-
         }
         private void exchange()
         {
             Currency from = getCurrency("Enter base currency code(Ex:USD) ");
             Currency to = getCurrency("Enter quote currency code(Ex:USD)");
-
-
 
             int size;
             Console.WriteLine("Enter size");
@@ -72,7 +65,7 @@ namespace Exchanger.src
                     rate = from.BanknoteSelling / to.BanknoteBuying;
                     break;
             }
-                   
+        
             try
             {
                 if (rate == 0)
@@ -80,14 +73,9 @@ namespace Exchanger.src
                 float result = size * rate;
                 Console.WriteLine($"Result:{result}");
             }
-            catch(InvalidCurrency ex)
-            {
-                Console.WriteLine($"Please enter valid currencies for {decision}");
-            }
-           
+            catch(InvalidCurrency ex){
+                Console.WriteLine($"Please enter valid currencies for {decision}"); }         
         }
-
-
 
         private Currency getCurrency(String message)
         {
@@ -102,7 +90,6 @@ namespace Exchanger.src
             }
             return getCurrency(message);
         }
-
 
     }
 }
