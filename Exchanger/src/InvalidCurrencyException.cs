@@ -11,10 +11,10 @@ namespace Exchanger.src
         {
             switch (decision)
             {
-                case 1: Console.WriteLine($"Exchange error ForexSelling: {from.ForexSelling} ForexBuying: {to.ForexBuying}");
+                case 1: Console.WriteLine($"Exchange error for Forex Exchange: {from.ForexSelling} ForexBuying: {to.ForexBuying}");
                          break;
                 case 2:
-                    Console.WriteLine($"Exchange error ForexSelling: {from.BanknoteSelling} ForexBuying: {to.BanknoteBuying}");
+                    Console.WriteLine($"Exchange error For Banknote Exchange: {from.BanknoteSelling} ForexBuying: {to.BanknoteBuying}");
                     break;
 
             }
