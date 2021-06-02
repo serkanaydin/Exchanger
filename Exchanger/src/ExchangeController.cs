@@ -47,7 +47,7 @@ namespace Exchanger.src
             {
                 Console.WriteLine("Forex(1) or banknote(2)");
                 ExchangeType.TryParse(Console.ReadLine(), out decision);
-            } while (!(decision == ExchangeType.ForexExchange || decision == ExchangeType.ForexExchange));
+            } while (!(decision == ExchangeType.ForexExchange || decision == ExchangeType.BanknoteExchange));
 
             doCalculations(size, from, to, decision);
             
