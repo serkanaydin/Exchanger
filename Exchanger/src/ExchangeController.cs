@@ -56,21 +56,28 @@ namespace Exchanger.src
         }
         private void doCalculations(int size,Currency from, Currency to,ExchangeType decision)
         {
-            float rate;
-            if(decision == ExchangeType.ForexExchange)
-                rate = (from.ForexSelling == 0 || from.ForexBuying == 0) ? -1 : from.ForexSelling / to.ForexBuying;
-            else
-                rate = (from.BanknoteSelling == 0 || from.BanknoteBuying == 0) ? -1 : from.BanknoteSelling / to.BanknoteBuying;
+            float rate=0;
+
+            switch (decision)
+            {
+                case ExchangeType.ForexExchange:
+                    rate = from.ForexSelling / to.ForexBuying;
+                    break;
+                case ExchangeType.BanknoteExchange:
+                    rate = from.BanknoteSelling / to.BanknoteBuying;
+                    break;
+            }
+                   
             try
             {
-                if (rate == -1)
+                if (rate == 0)
                     throw new InvalidCurrency(decision, from, to);
                 float result = size * rate;
                 Console.WriteLine($"Result:{result}");
             }
             catch(InvalidCurrency ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine($"Please enter valid currencies for {decision}");
             }
            
         }

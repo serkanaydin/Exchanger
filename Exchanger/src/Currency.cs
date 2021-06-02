@@ -16,7 +16,20 @@ namespace Exchanger.src
         public float ForexSelling { get; }
         public float BanknoteSelling { get; }
         public float BanknoteBuying { get; }
-       
+        
+        public bool isValidForexExchange()
+        {
+            if (this.ForexBuying == 0 || this.ForexSelling == 0)
+                return false;
+            else return true;
+        }
+        public bool isValidBanknoteExchange()
+        {
+            if (this.BanknoteBuying == 0 || this.BanknoteSelling ==0)
+                return false;
+            else return true;
+        }
+
         public Currency(String code,String name,String currencyName, float ForexBuying, float ForexSelling,  float BanknoteBuying, float BanknoteSelling)
         {
             this.code = code;
