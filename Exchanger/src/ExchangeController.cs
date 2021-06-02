@@ -57,8 +57,18 @@ namespace Exchanger.src
                 rate = (from.ForexSelling == 0 || from.ForexBuying == 0) ? -1 : from.ForexSelling / to.ForexBuying;
             else
                 rate = (from.BanknoteSelling == 0 || from.BanknoteBuying == 0) ? -1 : from.BanknoteSelling / to.BanknoteBuying;
-            float result = size * rate;
-            Console.WriteLine(result<0?"Error":$"Result:{result}");
+            try
+            {
+                if (rate == -1)
+                    throw new InvalidCurrency(decision, from, to);
+                float result = size * rate;
+                Console.WriteLine("Result:{result}");
+            }
+            catch(InvalidCurrency ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+           
         }
 
 
