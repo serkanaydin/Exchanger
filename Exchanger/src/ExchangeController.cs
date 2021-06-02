@@ -47,16 +47,27 @@ namespace Exchanger.src
                 ExchangeType.TryParse(Console.ReadLine(), out decision);
             } while (!(decision == ExchangeType.ForexExchange || decision == ExchangeType.BanknoteExchange));
 
-            float rate = getExchangeRate(from, to, decision);
+            
+            try
+            {
+                float rate = getExchangeRate(from, to, decision);
+                if (rate == 0 || float.IsPositiveInfinity(rate))
+                    throw new InvalidCurrency(decision, from, to);
+                Console.WriteLine("Enter size");
+                int.TryParse(Console.ReadLine(), out int size);
+                Console.WriteLine($"Result:{rate * size}");
+            }
+            catch (InvalidCurrency ex)
+            {
+                Console.WriteLine($"Please enter valid currencies for {decision}");
+            }
 
-            Console.WriteLine("Enter size");
-            int.TryParse(Console.ReadLine(), out int size);
-
-            Console.WriteLine($"Result:{rate*size}");
+            
 
 
 
         }
+
         private float getExchangeRate(Currency from, Currency to, ExchangeType decision)
         {
             float rate=0;
@@ -71,15 +82,7 @@ namespace Exchanger.src
                     break;
             }
 
-            try
-            {
-                if (rate == 0 || float.IsPositiveInfinity(rate))
-                    throw new InvalidCurrency(decision, from, to);
-            }
-            catch (InvalidCurrency ex)
-            {
-                Console.WriteLine($"Please enter valid currencies for {decision}"); 
-            }
+            
             return rate;
         }
             
