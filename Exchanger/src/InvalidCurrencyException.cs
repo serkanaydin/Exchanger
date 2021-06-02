@@ -15,10 +15,9 @@ namespace Exchanger.src
                     + " Forex exchange is not available for " + ((from.ForexSelling==0)? from.code:to.code));
                          break;
                 case ExchangeType.BanknoteExchange:
-                    Console.WriteLine($"Exchange error For Banknote Exchange: {from.BanknoteSelling} ForexBuying: {to.BanknoteBuying}"
+                    Console.WriteLine($"Exchange error For Banknote Exchange: {from.BanknoteSelling} BanknoteBuying: {to.BanknoteBuying}"
                     + "Banknote exchange is not available for " + ((from.BanknoteSelling == 0) ? from.code : to.code));
                     break;
-
             }
         }
     }

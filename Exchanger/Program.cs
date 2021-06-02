@@ -29,23 +29,21 @@ namespace Exchanger
 
             foreach (XmlNode childrenNode in parentNode)
             {
-                float temp;
-
                 String code = childrenNode.Attributes["Kod"].Value;
                 String name = childrenNode.SelectSingleNode("Isim").InnerText;
                 String currencyName = childrenNode.SelectSingleNode("CurrencyName").InnerText;
 
-                float ForexBuying = float.TryParse((childrenNode.SelectSingleNode("ForexBuying").InnerText), NumberStyles.Currency,
-                en.NumberFormat, out temp) ? temp : 0;
+                float.TryParse((childrenNode.SelectSingleNode("ForexBuying").InnerText), NumberStyles.Currency,
+                en.NumberFormat, out float ForexBuying);
 
-                float ForexSelling = float.TryParse(childrenNode.SelectSingleNode("ForexSelling").InnerText, NumberStyles.Currency,
-                en.NumberFormat, out temp) ? temp : 0;
+                float.TryParse(childrenNode.SelectSingleNode("ForexSelling").InnerText, NumberStyles.Currency,
+                en.NumberFormat, out float ForexSelling);
 
-                float BanknoteBuying = float.TryParse(childrenNode.SelectSingleNode("BanknoteBuying").InnerText, NumberStyles.Currency,
-                en.NumberFormat, out temp) ? temp : 0;
+                float.TryParse(childrenNode.SelectSingleNode("BanknoteBuying").InnerText, NumberStyles.Currency,
+                en.NumberFormat, out float BanknoteBuying);
 
-                float BanknoteSelling = float.TryParse(childrenNode.SelectSingleNode("BanknoteSelling").InnerText, NumberStyles.Currency,
-                en.NumberFormat, out temp) ? temp : 0;
+                float.TryParse(childrenNode.SelectSingleNode("BanknoteSelling").InnerText, NumberStyles.Currency,
+                en.NumberFormat, out float BanknoteSelling);
 
                 CurrencyList.Add(new Currency(code, name, currencyName, ForexBuying, ForexSelling, BanknoteBuying, BanknoteSelling));
             }
